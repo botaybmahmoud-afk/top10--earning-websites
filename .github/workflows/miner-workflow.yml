@@ -1,0 +1,33 @@
+name: Continuous Content Mining System
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-next-run]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: 1. Checkout Code
+      uses: actions/checkout@v4
+
+    - name: 2. Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: 3. Run Mining Script
+      run: node miner.js
+
+    - name: 4. Self Trigger Next Loop
+      if: always()
+      run: |
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://github.com{{ github.repository }}/dispatches \
+          -d '{"event_type": "trigger-next-run"}'
