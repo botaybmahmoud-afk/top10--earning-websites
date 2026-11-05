@@ -7,7 +7,8 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: ubuntu-latest
+    # تحديد إصدار الـ Ubuntu المستقر يدوياً لتفادي تضارب التحديثات المفاجئة
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
@@ -15,10 +16,10 @@ jobs:
     - name: 1. Checkout Code
       uses: actions/checkout@v4
 
-    - name: 2. Setup Node.js
+    - name: 2. Upgrade to Node.js 24 Runtime
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '24' # الترقية الرسمية المتوافقة مع تحديثات سيرفرات جيت هوب
 
     - name: 3. Run Mining Script
       run: node miner.js
