@@ -43,9 +43,9 @@ async function startAdvancedMining() {
 </body>
 </html>`;
 
-    // حفظ كـ أصل رقمي حي يقرأه موقع GitHub Pages فوراً
-    fs.writeFileSync('index.html', htmlContent);
-    console.log("✅ تم بناء الواجهة المحدثة بنجاح كامل وحقن رابط الأرباح.");
+    // حفظ مستقل تماماً في ملف مخصص لحماية وتأمين موقعك القديم
+    fs.writeFileSync('miner.html', htmlContent);
+    console.log("✅ تم بناء الواجهة المستقلة بنجاح كامل وحقن رابط الأرباح.");
 
   } catch (error) {
     console.log("⚠️ خطأ تقني في التوليد: " + error.message);
