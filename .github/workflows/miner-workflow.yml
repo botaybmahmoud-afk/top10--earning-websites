@@ -1,9 +1,9 @@
 name: Continuous Content Mining System
 
 on:
-  workflow_dispatch:
-  repository_dispatch:
-    types: [trigger-next-run]
+  schedule:
+    - cron: '0 */1 * * *' # يعمل تلقائياً كل ساعة بشكل مستقر ومنظم لحماية حساب الإعلانات من الحظر
+  workflow_dispatch: # تفعيل يدوي فوري بنقرة واحدة من هاتفك عند الحاجة
 
 jobs:
   build-and-run:
@@ -12,24 +12,22 @@ jobs:
       contents: write
 
     steps:
-    - name: 1. Checkout Repository
+    - name: 1. سحب الكود وتنظيف بيئة السيرفر
       uses: actions/checkout@v4
       with:
-        clean: true # إجبار السيرفر على تنظيف الكاش والملفات القديمة تماماً عند البدء
+        clean: true
 
-    - name: 2. Set Node.js 24 Runtime
+    - name: 2. تهيئة بيئة Node.js الحديثة والمستقرة
       uses: actions/setup-node@v4
       with:
-        node-version: '24'
+        node-version: '20'
 
-    - name: 3. Run Execution Script
+    - name: 3. تشغيل ماكينة توليد واجهات الـ HTML
       run: node miner.js
 
-    - name: 4. Self Trigger Loop
-      if: always()
+    - name: 4. حفظ وتثبيت الواجهة الجديدة داخل المستودع تلقائياً
       run: |
-        curl -X POST \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://github.com{{ github.repository }}/dispatches \
-          -d '{"event_type": "trigger-next-run"}'
+        git config --global user.name "GitHub Action"
+        git config --global user.email "actions@github.com"
+        git add index.html
+        git diff --quiet && git diff --staged --quiet || (git commit -m "⚡ تحديث تلقائي لواجهة الهبوط وحقن الأرباح" && git push)
