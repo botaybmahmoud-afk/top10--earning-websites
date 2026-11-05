@@ -1,0 +1,32 @@
+name: Run Automated Traffic Bot
+
+on:
+  schedule:
+    # السيرفر ينطلق تلقائياً رأس كل ساعة وبشكل دائم
+    - cron: '0 * * * *'
+  workflow_dispatch: # زر التشغيل اليدوي المباشر من الهاتف
+
+jobs:
+  run-traffic:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Stealth Dependencies
+      run: |
+        npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+
+    # الخدعة العبقريّة: السيرفر ينتظر عدد ثوانٍ عشوائي تماماً (بين 1 إلى 45 دقيقة) قبل تشغيل الكود لبعثرة الأوقات داخل الساعة
+    - name: Execute Autonomous Traffic Agent with Random Sleep
+      run: |
+        SLEEP_TIME=$((RANDOM % 2700 + 60))
+        echo "⏱️ تأخير عشوائي متموه للزيارة لمدة $SLEEP_TIME ثانية لمنع رصد الأنماط الآلية..."
+        sleep $SLEEP_TIME
+        node bot.js
