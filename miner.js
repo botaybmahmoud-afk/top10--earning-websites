@@ -1,32 +1,55 @@
 const fs = require('fs');
 
-async function startDataMining() {
-  console.log("🚀 بدء الماكينة السحابية الحية...");
+async function startAdvancedMining() {
+  console.log("⚡ انطلاق محرك التوليد المتقدم وحقن الواجهات الفاخرة...");
   
   try {
-    const keywords = [
-      { topic: "Crypto Trading Bot", cpc: "45.50" },
-      { topic: "Cloud Security", cpc: "62.10" }
+    // مصفوفة الكلمات الدلالية الساخنة والأعلى عائداً في أمريكا لعام 2026
+    const premiumTrends = [
+      { title: "Enterprise Crypto Arbitrage Networks 2026", category: "Finance" },
+      { title: "Automated Cloud Infrastructure Security", category: "Tech" },
+      { title: "High-Frequency Algorithmic Liquidity Pipelines", category: "Trading" },
+      { title: "Decentralized Data Engineering Protocols", category: "Web3" }
     ];
 
-    const idx = Math.floor(Math.random() * keywords.length);
-    const target = keywords[idx];
-    
-    console.log("🎯 الهدف الحالي: " + target.topic);
-    console.log("💰 العائد المتوقع: " + target.cpc);
+    // اختيار عشوائي ذكي للموضوع النشط في الدورة الحالية
+    const target = premiumTrends[Math.floor(Math.random() * premiumTrends.length)];
+    console.log(`🔥 تم قنص الكلمة المستهدفة: [${target.title}]`);
 
     const mySmartlink = "https://data527.click";
 
-    let html = "# Institutional Guide: " + target.topic + "\n";
-    html += "This tech document provides deep insight into advanced implementation...\n";
-    html += "<a href='" + mySmartlink + "' target='_blank'>Click Here</a>\n";
+    // هندسة واجهة الويب الجذابة (Premium HTML/CSS) لمنع هروب الزوار الحقيقيين
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Resource: ${target.title}</title>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+        .card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #334155; max-width: 600px; margin: 20px; }
+        h1 { color: #38bdf8; font-size: 24px; margin-bottom: 20px; }
+        p { color: #94a3b8; font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
+        .btn { background-color: #0284c7; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background 0.3s; display: inline-block; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4); }
+        .btn:hover { background-color: #0369a1; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎯 Premium Resource Unlocked</h1>
+        <p>You have automatically routed to the global technical infrastructure documentation regarding: <strong>${target.title}</strong> (${target.category} Sector).</p>
+        <a href="${mySmartlink}" target="_blank" class="btn">👉 Access Premium Document Now</a>
+    </div>
+</body>
+</html>`;
 
-    fs.writeFileSync('premium-content.md', html);
-    console.log("✅ تم توليد الأصل الرقمي وحقن بصمة الأرباح بنجاح.");
+    // حفظ كـ أصل رقمي حي يقرأه موقع GitHub Pages فوراً
+    fs.writeFileSync('index.html', htmlContent);
+    console.log("✅ تم بناء الواجهة المحدثة بنجاح كامل وحقن رابط الأرباح.");
 
   } catch (error) {
-    console.log("⚠️ خطأ في المعالجة: " + error.message);
+    console.log("⚠️ خطأ تقني في التوليد: " + error.message);
   }
 }
 
-startDataMining();
+startAdvancedMining();
